@@ -3,29 +3,30 @@
 	<script type="text/javascript" src="d3.v4.min.js"></script>
 </head>
 <body>
+
 <script type="text/javascript">
-var spaceCircles = [30, 70, 110];
-
+//The SVG Container
 var svgContainer = d3.select("body").append("svg")
-                                 .attr("width", 200)
-                                 .attr("height", 200);
+                                    .attr("width", 200)
+                                    .attr("height", 200);
 
-var circles = svgContainer.selectAll("circle")
-                       .data(spaceCircles)
-                       .enter()
-                      .append("circle");
+                                    //The line SVG Path we draw
+var lineGraph = svgContainer.append("path")
+                            .attr("d", lineFunction(lineData))
+                            .attr("stroke", "blue")
+                            .attr("stroke-width", 2)
+                            .attr("fill", "none");
+//The data for our line
+ var lineData = [ { "x": 1,   "y": 5},  { "x": 20,  "y": 20},
+                  { "x": 40,  "y": 10}, { "x": 60,  "y": 40},
+                  { "x": 80,  "y": 5},  { "x": 100, "y": 60}];
+ 
+ //This is the accessor function we talked about above
+ var lineFunction = d3.svg.line()
+                          .x(function(d) { return d.x; })
+                          .y(function(d) { return d.y; })
+                         .interpolate("linear");
 
-var circleAttributes = circles
-                   .attr("cx", function (d) { return d; })
-                   .attr("cy", function (d) { return d; })
-                   .attr("r", 20 )
-                   .style("fill", function(d) {
-                     var returnColor;
-                     if (d === 30) { returnColor = "green";
-                     } else if (d === 70) { returnColor = "purple";
-                     } else if (d === 110) { returnColor = "red"; }
-                     return returnColor;
-                   });
 </script>
 </body>
 </html>
