@@ -3,9 +3,16 @@
 	<script type="text/javascript" src="d3.v4.min.js"></script>
 </head>
 <body>
-	<p>Hello</p>
-	<svg width="50" height="50">
-	  <circle cx="25" cy="25" r="25" fill="purple" />
-	</svg>
+	<script type="text/javascript">
+		var theData = [ 1, 2, 3 ]
+
+ var p = d3.select("body").selectAll("p")
+   .data(theData)
+   .enter()
+   .append("p")
+   .text(function (d,i) {
+     return "i = " + i + " d = "+d;
+    });
+	</script>
 </body>
 </html>
